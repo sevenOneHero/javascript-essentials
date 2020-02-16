@@ -1,11 +1,12 @@
-const hello = 'hello';
-const world = 'world';
+// goes to tasks queue
+setTimeout(() => {
+  console.log('3', 'just stack', 'third');
+}, 0);
 
-const prom = Promise.resolve(hello);
-
-// Goes to microtask queue
-prom.then(input => {
-  console.log({ input, world });
+// Goes to microtask queue has higher priority than the tasks queue
+Promise.resolve('hello').then(input => {
+  console.log('2', 'microtask', 'second');
 });
 
-console.log('first');
+// goes directly to task queue
+console.log('1', 'callstack', 'first');
